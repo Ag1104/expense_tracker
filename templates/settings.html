@@ -1,0 +1,136 @@
+{% extends "base.html" %}
+{% block title %}Settings — SpendWise{% endblock %}
+{% block body %}
+{% include "partials/nav.html" %}
+
+<main class="app-main">
+  <div class="page-header">
+    <div>
+      <h1 class="page-title">Settings</h1>
+      <p class="page-sub">Manage your account and integrations</p>
+    </div>
+  </div>
+
+  <div class="settings-grid">
+
+    <!-- Notifications -->
+    <div class="settings-card">
+      <div class="settings-card-header">
+        <span class="settings-icon">🔔</span>
+        <h3>Daily Reminders</h3>
+      </div>
+      <p class="settings-desc">Receive a push notification at 8 PM reminding you to log your expenses.</p>
+      <div class="toggle-row">
+        <span>Enable notifications</span>
+        <label class="toggle">
+          <input type="checkbox" id="notif-toggle" />
+          <span class="slider"></span>
+        </label>
+      </div>
+      <p class="settings-note" id="notif-status">Loading...</p>
+      <button class="btn-secondary mt-8" id="test-notif-btn">Send Test Notification</button>
+    </div>
+
+    <!-- Bank Sync -->
+    <div class="settings-card">
+      <div class="settings-card-header">
+        <span class="settings-icon">🏦</span>
+        <h3>Bank Sync</h3>
+      </div>
+      <p class="settings-desc">Import transactions from your bank automatically (mock mode for demo).</p>
+      <div class="form-group">
+        <label>Provider</label>
+        <select id="bank-provider" class="select-pill full-width">
+          <option value="mock">Mock Bank (Demo)</option>
+          <option value="mono" disabled>Mono (Coming Soon)</option>
+          <option value="plaid" disabled>Plaid (Coming Soon)</option>
+          <option value="stitch" disabled>Stitch (Coming Soon)</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Sync Period (days)</label>
+        <select id="sync-days" class="select-pill full-width">
+          <option value="7">Last 7 days</option>
+          <option value="30" selected>Last 30 days</option>
+          <option value="90">Last 90 days</option>
+        </select>
+      </div>
+      <button class="btn-accent" id="sync-btn">Sync Now</button>
+      <div id="sync-result" class="sync-result hidden"></div>
+    </div>
+
+    <!-- CSV Import -->
+    <div class="settings-card">
+      <div class="settings-card-header">
+        <span class="settings-icon">📄</span>
+        <h3>CSV Import</h3>
+      </div>
+      <p class="settings-desc">Upload your bank statement CSV. Supports most Nigerian bank export formats.</p>
+      <div class="upload-zone" id="upload-zone">
+        <div class="upload-icon">⬆</div>
+        <p>Drag & drop CSV or click to browse</p>
+        <input type="file" id="csv-file-input" accept=".csv" style="display:none" />
+      </div>
+      <div id="csv-result" class="sync-result hidden"></div>
+    </div>
+
+    <!-- Categories -->
+    <div class="settings-card">
+      <div class="settings-card-header">
+        <span class="settings-icon">🏷️</span>
+        <h3>Categories</h3>
+      </div>
+      <p class="settings-desc">Add custom spending categories.</p>
+      <div id="categories-list" class="categories-list"></div>
+      <div class="add-cat-row">
+        <input type="text" id="new-cat-name" placeholder="Category name" class="input-sm" />
+        <input type="text" id="new-cat-icon" placeholder="Icon 🎯" class="input-sm icon-input" maxlength="2" />
+        <input type="color" id="new-cat-color" value="#4ade80" class="color-input" />
+        <button class="btn-accent" id="add-cat-btn">Add</button>
+      </div>
+    </div>
+
+    <!-- Account -->
+    <div class="settings-card">
+      <div class="settings-card-header">
+        <span class="settings-icon">👤</span>
+        <h3>Account</h3>
+      </div>
+      <div class="account-info">
+        <p><strong>Username:</strong> <span id="acc-username">—</span></p>
+        <p><strong>Email:</strong> <span id="acc-email">—</span></p>
+      </div>
+      <button class="btn-danger mt-8" id="logout-btn">Sign Out</button>
+    </div>
+
+    <!-- Export -->
+    <div class="settings-card">
+      <div class="settings-card-header">
+        <span class="settings-icon">📊</span>
+        <h3>Export Data</h3>
+      </div>
+      <p class="settings-desc">Download your transaction history as CSV.</p>
+      <div class="export-row">
+        <select id="export-month" class="select-pill">
+          <option value="">All Months</option>
+          <option value="1">January</option><option value="2">February</option>
+          <option value="3">March</option><option value="4">April</option>
+          <option value="5">May</option><option value="6">June</option>
+          <option value="7">July</option><option value="8">August</option>
+          <option value="9">September</option><option value="10">October</option>
+          <option value="11">November</option><option value="12">December</option>
+        </select>
+        <select id="export-year" class="select-pill">
+          <option value="2024">2024</option>
+          <option value="2025">2025</option>
+          <option value="2026" selected>2026</option>
+        </select>
+        <button class="btn-secondary" id="export-btn">Download CSV</button>
+      </div>
+    </div>
+
+  </div>
+</main>
+
+<script src="/static/js/settings.js"></script>
+{% endblock %}

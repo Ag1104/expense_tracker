@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+{% block title %}Transactions — SpendWise{% endblock %}
+{% block body %}
+{% include "partials/nav.html" %}
+
+<main class="app-main">
+  <div class="page-header">
+    <div>
+      <h1 class="page-title">Transactions</h1>
+      <p class="page-sub">Your complete financial history</p>
+    </div>
+    <div class="filter-bar">
+      <select id="filter-type" class="select-pill">
+        <option value="">All Types</option>
+        <option value="credit">Credit</option>
+        <option value="debit">Debit</option>
+      </select>
+      <select id="filter-month" class="select-pill">
+        <option value="">All Months</option>
+        <option value="1">Jan</option><option value="2">Feb</option>
+        <option value="3">Mar</option><option value="4">Apr</option>
+        <option value="5">May</option><option value="6">Jun</option>
+        <option value="7">Jul</option><option value="8">Aug</option>
+        <option value="9">Sep</option><option value="10">Oct</option>
+        <option value="11">Nov</option><option value="12">Dec</option>
+      </select>
+      <select id="filter-year" class="select-pill">
+        <option value="2024">2024</option>
+        <option value="2025">2025</option>
+        <option value="2026" selected>2026</option>
+      </select>
+      <button class="btn-accent" id="add-txn-btn">+ Add</button>
+      <button class="btn-secondary" id="export-btn">⬇ Export CSV</button>
+    </div>
+  </div>
+
+  <div class="txn-controls">
+    <div class="txn-search-wrap">
+      <input type="text" id="search-input" class="search-input" placeholder="Search transactions..." />
+    </div>
+    <p class="txn-total-label">Total: <strong id="txn-count-label">0</strong> transactions</p>
+  </div>
+
+  <div id="txn-list-wrap" class="txn-list full-list"></div>
+  <div id="pagination" class="pagination"></div>
+</main>
+
+{% include "partials/txn-modal.html" %}
+
+<script src="/static/js/transactions.js"></script>
+{% endblock %}

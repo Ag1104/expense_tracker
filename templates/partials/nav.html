@@ -1,0 +1,19 @@
+<nav class="app-nav">
+  <div class="nav-brand">
+    <span class="brand-icon">₦</span>
+    <span class="brand-name">SpendWise</span>
+  </div>
+  <div class="nav-links">
+    <a href="/dashboard" class="nav-link {% if request.path == '/dashboard' %}active{% endif %}">
+      <span class="nav-icon">📊</span><span>Dashboard</span>
+    </a>
+    <a href="/transactions-page" class="nav-link {% if request.path == '/transactions-page' %}active{% endif %}">
+      <span class="nav-icon">💸</span><span>Transactions</span>
+    </a>
+    <a href="/settings" class="nav-link {% if request.path == '/settings' %}active{% endif %}">
+      <span class="nav-icon">⚙️</span><span>Settings</span>
+    </a>
+  </div>
+  <button class="nav-hamburger" id="nav-hamburger" aria-label="Menu">☰</button>
+</nav>
+<div class="nav-mobile-overlay" id="nav-overlay"></div>

@@ -1,0 +1,110 @@
+{% extends "base.html" %}
+{% block title %}Dashboard — SpendWise{% endblock %}
+{% block head %}
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.3/dist/chart.umd.min.js"></script>
+{% endblock %}
+{% block body %}
+{% include "partials/nav.html" %}
+
+<main class="app-main">
+  <div class="page-header">
+    <div>
+      <h1 class="page-title">Dashboard</h1>
+      <p class="page-sub">Good <span id="greeting-time">day</span>, <strong>{{ user.username }}</strong> 👋</p>
+    </div>
+    <div class="filter-bar">
+      <select id="filter-month" class="select-pill">
+        <option value="">All Months</option>
+        <option value="1">January</option><option value="2">February</option>
+        <option value="3">March</option><option value="4">April</option>
+        <option value="5">May</option><option value="6">June</option>
+        <option value="7">July</option><option value="8">August</option>
+        <option value="9">September</option><option value="10">October</option>
+        <option value="11">November</option><option value="12">December</option>
+      </select>
+      <select id="filter-year" class="select-pill">
+        <option value="2024">2024</option>
+        <option value="2025">2025</option>
+        <option value="2026" selected>2026</option>
+      </select>
+      <button class="btn-accent" id="add-txn-btn">+ Add Transaction</button>
+    </div>
+  </div>
+
+  <!-- Summary Cards -->
+  <div class="summary-grid">
+    <div class="summary-card credit">
+      <div class="card-icon">💚</div>
+      <div class="card-content">
+        <p class="card-label">Total Credit</p>
+        <p class="card-value" id="total-credit">₦0.00</p>
+      </div>
+    </div>
+    <div class="summary-card debit">
+      <div class="card-icon">🔴</div>
+      <div class="card-content">
+        <p class="card-label">Total Debit</p>
+        <p class="card-value" id="total-debit">₦0.00</p>
+      </div>
+    </div>
+    <div class="summary-card balance">
+      <div class="card-icon">⚖️</div>
+      <div class="card-content">
+        <p class="card-label">Balance</p>
+        <p class="card-value" id="total-balance">₦0.00</p>
+      </div>
+    </div>
+    <div class="summary-card txn-count">
+      <div class="card-icon">📊</div>
+      <div class="card-content">
+        <p class="card-label">Transactions</p>
+        <p class="card-value" id="txn-count">0</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Charts Row -->
+  <div class="charts-grid">
+    <div class="chart-card wide">
+      <div class="chart-header">
+        <h3>Spending Over Time</h3>
+        <div class="chart-legend">
+          <span class="legend-dot" style="background:#4ade80"></span>Credit
+          <span class="legend-dot" style="background:#f87171; margin-left:12px"></span>Debit
+        </div>
+      </div>
+      <div class="chart-wrap">
+        <canvas id="line-chart"></canvas>
+      </div>
+    </div>
+    <div class="chart-card">
+      <div class="chart-header"><h3>Expenses by Category</h3></div>
+      <div class="chart-wrap pie-wrap">
+        <canvas id="pie-chart"></canvas>
+      </div>
+      <div id="pie-legend" class="pie-legend"></div>
+    </div>
+  </div>
+
+  <!-- Monthly Bar Chart -->
+  <div class="chart-card full-width">
+    <div class="chart-header"><h3>Monthly Overview — <span id="bar-year">2026</span></h3></div>
+    <div class="chart-wrap">
+      <canvas id="bar-chart" style="max-height:220px"></canvas>
+    </div>
+  </div>
+
+  <!-- Recent Transactions -->
+  <div class="recent-section">
+    <div class="section-header">
+      <h3>Recent Transactions</h3>
+      <a href="/transactions-page" class="link-btn">View all →</a>
+    </div>
+    <div id="recent-list" class="txn-list"></div>
+  </div>
+</main>
+
+{% include "partials/txn-modal.html" %}
+
+<script src="/static/js/dashboard.js"></script>
+{% endblock %}
